@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListClientesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ClientesListForm">
+                <p:panel header="#{bundle.ListClientesTitle}">
+                    <p:dataTable id="datalist" value="#{clientesController.items}" var="item"
+                                 selectionMode="single" selection="#{clientesController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idcliente}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_idcliente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idcliente}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_numerodocumento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numerodocumento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_primerapellido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.primerapellido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_segundoapellido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.segundoapellido}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_primernombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.primernombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_segundonombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.segundonombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListClientesTitle_idtipodocumento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idtipodocumento}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clientesController.prepareCreate}" update=":ClientesCreateForm" oncomplete="PF('ClientesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ClientesViewForm" oncomplete="PF('ClientesViewDialog').show()" disabled="#{empty clientesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ClientesEditForm" oncomplete="PF('ClientesEditDialog').show()" disabled="#{empty clientesController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{clientesController.destroy}" update=":growl,datalist" disabled="#{empty clientesController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
