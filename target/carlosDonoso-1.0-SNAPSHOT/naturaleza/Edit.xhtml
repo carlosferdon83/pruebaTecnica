@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -13,7 +14,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{naturalezaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditNaturalezaLabel_idnaturaleza}" for="idnaturaleza" />
-                        <p:inputText id="idnaturaleza" value="#{naturalezaController.selected.idnaturaleza}" title="#{bundle.EditNaturalezaTitle_idnaturaleza}" required="true" requiredMessage="#{bundle.EditNaturalezaRequiredMessage_idnaturaleza}"/>
+                        <p:inputText disabled="true" id="idnaturaleza" value="#{naturalezaController.selected.idnaturaleza}" title="#{bundle.EditNaturalezaTitle_idnaturaleza}" required="true" requiredMessage="#{bundle.EditNaturalezaRequiredMessage_idnaturaleza}"/>
                         <p:outputLabel value="#{bundle.EditNaturalezaLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{naturalezaController.selected.descripcion}" title="#{bundle.EditNaturalezaTitle_descripcion}" required="true" requiredMessage="#{bundle.EditNaturalezaRequiredMessage_descripcion}"/>
                     </p:panelGrid>

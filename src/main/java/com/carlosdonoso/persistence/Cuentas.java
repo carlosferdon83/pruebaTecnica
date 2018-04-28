@@ -8,8 +8,8 @@ package com.carlosdonoso.persistence;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -74,7 +74,7 @@ public class Cuentas implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clientes idcliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcuentas", fetch = FetchType.LAZY)
-    private List<Movimientos> movimientosList;
+    private Collection<Movimientos> movimientosCollection;
 
     public Cuentas() {
     }
@@ -139,12 +139,12 @@ public class Cuentas implements Serializable {
     }
 
     @XmlTransient
-    public List<Movimientos> getMovimientosList() {
-        return movimientosList;
+    public Collection<Movimientos> getMovimientosCollection() {
+        return movimientosCollection;
     }
 
-    public void setMovimientosList(List<Movimientos> movimientosList) {
-        this.movimientosList = movimientosList;
+    public void setMovimientosCollection(Collection<Movimientos> movimientosCollection) {
+        this.movimientosCollection = movimientosCollection;
     }
 
     @Override

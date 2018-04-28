@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -13,7 +14,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{movimientosController.selected != null}">
                         <p:outputLabel value="#{bundle.EditMovimientosLabel_idmovimientos}" for="idmovimientos" />
-                        <p:inputText id="idmovimientos" value="#{movimientosController.selected.idmovimientos}" title="#{bundle.EditMovimientosTitle_idmovimientos}" required="true" requiredMessage="#{bundle.EditMovimientosRequiredMessage_idmovimientos}"/>
+                        <p:inputText disabled="true" id="idmovimientos" value="#{movimientosController.selected.idmovimientos}" title="#{bundle.EditMovimientosTitle_idmovimientos}" required="true" requiredMessage="#{bundle.EditMovimientosRequiredMessage_idmovimientos}"/>
                         <p:outputLabel value="#{bundle.EditMovimientosLabel_valor}" for="valor" />
                         <p:inputText id="valor" value="#{movimientosController.selected.valor}" title="#{bundle.EditMovimientosTitle_valor}" required="true" requiredMessage="#{bundle.EditMovimientosRequiredMessage_valor}"/>
                         <p:outputLabel value="#{bundle.EditMovimientosLabel_fechamovimiento}" for="fechamovimiento" />
@@ -23,14 +24,14 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{cuentasController.itemsAvailableSelectOne}"
                                            var="idcuentasItem"
-                                           itemValue="#{idcuentasItem}"/>
+                                           itemValue="#{idcuentasItem}" itemLabel="#{idcuentasItem.numerocuenta}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditMovimientosLabel_idnaturaleza}" for="idnaturaleza" />
                         <p:selectOneMenu id="idnaturaleza" value="#{movimientosController.selected.idnaturaleza}" required="true" requiredMessage="#{bundle.EditMovimientosRequiredMessage_idnaturaleza}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{naturalezaController.itemsAvailableSelectOne}"
                                            var="idnaturalezaItem"
-                                           itemValue="#{idnaturalezaItem}"/>
+                                           itemValue="#{idnaturalezaItem}" itemLabel="#{idnaturalezaItem.descripcion}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{movimientosController.update}" value="#{bundle.Save}" update="display,:MovimientosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MovimientosEditDialog');"/>

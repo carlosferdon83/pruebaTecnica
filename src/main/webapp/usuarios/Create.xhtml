@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -24,11 +25,11 @@
                         <p:selectOneMenu id="idclientes" value="#{usuariosController.selected.idclientes}" required="true" requiredMessage="#{bundle.EditUsuariosRequiredMessage_idclientes}">
                             <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
                                            var="idclientesItem"
-                                           itemValue="#{idclientesItem}"/>
+                                           itemValue="#{idclientesItem}" itemLabel="#{idclientesItem.numerodocumento}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuariosController.create}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuariosCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuariosCreateDialog.hide()"/>
+                    <b:commandButton look="primary" actionListener="#{usuariosController.create}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuariosCreateDialog');"/>
+                    <b:commandButton look="info" value="#{bundle.Cancel}" onclick="UsuariosCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

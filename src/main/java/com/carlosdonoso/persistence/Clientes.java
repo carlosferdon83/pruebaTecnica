@@ -7,7 +7,7 @@ package com.carlosdonoso.persistence;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -82,9 +82,9 @@ public class Clientes implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tiposdocumento idtipodocumento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcliente", fetch = FetchType.LAZY)
-    private List<Cuentas> cuentasList;
+    private Collection<Cuentas> cuentasCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idclientes", fetch = FetchType.LAZY)
-    private List<Usuarios> usuariosList;
+    private Collection<Usuarios> usuariosCollection;
 
     public Clientes() {
     }
@@ -166,21 +166,21 @@ public class Clientes implements Serializable {
     }
 
     @XmlTransient
-    public List<Cuentas> getCuentasList() {
-        return cuentasList;
+    public Collection<Cuentas> getCuentasCollection() {
+        return cuentasCollection;
     }
 
-    public void setCuentasList(List<Cuentas> cuentasList) {
-        this.cuentasList = cuentasList;
+    public void setCuentasCollection(Collection<Cuentas> cuentasCollection) {
+        this.cuentasCollection = cuentasCollection;
     }
 
     @XmlTransient
-    public List<Usuarios> getUsuariosList() {
-        return usuariosList;
+    public Collection<Usuarios> getUsuariosCollection() {
+        return usuariosCollection;
     }
 
-    public void setUsuariosList(List<Usuarios> usuariosList) {
-        this.usuariosList = usuariosList;
+    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
+        this.usuariosCollection = usuariosCollection;
     }
 
     @Override

@@ -7,7 +7,7 @@ package com.carlosdonoso.persistence;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,7 +51,7 @@ public class Naturaleza implements Serializable {
     @Column(name = "DESCRIPCION", nullable = false, length = 20)
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idnaturaleza", fetch = FetchType.LAZY)
-    private List<Movimientos> movimientosList;
+    private Collection<Movimientos> movimientosCollection;
 
     public Naturaleza() {
     }
@@ -82,12 +82,12 @@ public class Naturaleza implements Serializable {
     }
 
     @XmlTransient
-    public List<Movimientos> getMovimientosList() {
-        return movimientosList;
+    public Collection<Movimientos> getMovimientosCollection() {
+        return movimientosCollection;
     }
 
-    public void setMovimientosList(List<Movimientos> movimientosList) {
-        this.movimientosList = movimientosList;
+    public void setMovimientosCollection(Collection<Movimientos> movimientosCollection) {
+        this.movimientosCollection = movimientosCollection;
     }
 
     @Override

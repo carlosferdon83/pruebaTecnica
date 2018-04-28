@@ -6,9 +6,12 @@
 package com.carlosdonoso.prueba;
 
 import com.carlosdonoso.persistence.Cuentas;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +31,18 @@ public class CuentasFacade extends AbstractFacade<Cuentas> {
     public CuentasFacade() {
         super(Cuentas.class);
     }
+    
+    public Cuentas obtenerSaldoCuenta(BigDecimal idCuenta){
+        Cuentas cuenta = null;
+        try{
+            Query query = getEntityManager().createQuery("select c from Cuentas c where c.idcuentas = ?1");
+            query.setParameter(1,idCuenta);
+            cuenta = (Cuentas) query.getSingleResult();
+        }catch(Exception ex){
+            System.out.println("Un error ha ocurrido "+ex.getMessage());
+        }
+        return cuenta;
+    }
+
     
 }

@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -26,7 +27,7 @@
                         <p:selectOneMenu id="idcliente" value="#{cuentasController.selected.idcliente}" required="true" requiredMessage="#{bundle.EditCuentasRequiredMessage_idcliente}">
                             <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
                                            var="idclienteItem"
-                                           itemValue="#{idclienteItem}"/>
+                                           itemValue="#{idclienteItem}" itemLabel="#{idclienteItem.numerodocumento}" />
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{cuentasController.create}" value="#{bundle.Save}" update="display,:CuentasListForm:datalist,:growl" oncomplete="handleSubmit(args,'CuentasCreateDialog');"/>

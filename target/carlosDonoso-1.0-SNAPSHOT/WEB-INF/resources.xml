@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="jdbc/orcl" type="javax.sql.DataSource">#Sat Apr 28 02:28:16 COT 2018
+jdbcDriver=oracle.jdbc.OracleDriver
+password=anita
+userName=pruebas
+jdbcUrl=jdbc\:oracle\:thin\:@localhost\:1521\:XE
+</Resource>
+</resources>

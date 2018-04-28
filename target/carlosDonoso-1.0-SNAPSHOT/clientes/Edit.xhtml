@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -13,9 +14,15 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clientesController.selected != null}">
                         <p:outputLabel value="#{bundle.EditClientesLabel_idcliente}" for="idcliente" />
-                        <p:inputText id="idcliente" value="#{clientesController.selected.idcliente}" title="#{bundle.EditClientesTitle_idcliente}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idcliente}"/>
+                        <p:inputText disabled="true" id="idcliente" value="#{clientesController.selected.idcliente}" title="#{bundle.EditClientesTitle_idcliente}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idcliente}"/>
                         <p:outputLabel value="#{bundle.EditClientesLabel_numerodocumento}" for="numerodocumento" />
                         <p:inputText id="numerodocumento" value="#{clientesController.selected.numerodocumento}" title="#{bundle.EditClientesTitle_numerodocumento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_numerodocumento}"/>
+                        <p:selectOneMenu id="idtipodocumento" value="#{clientesController.selected.idtipodocumento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idtipodocumento}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tiposdocumentoController.itemsAvailableSelectOne}"
+                                           var="idtipodocumentoItem"
+                                           itemValue="#{idtipodocumentoItem}" itemLabel="#{idtipodocumentoItem.descripcion}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditClientesLabel_primerapellido}" for="primerapellido" />
                         <p:inputText id="primerapellido" value="#{clientesController.selected.primerapellido}" title="#{bundle.EditClientesTitle_primerapellido}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_primerapellido}"/>
                         <p:outputLabel value="#{bundle.EditClientesLabel_segundoapellido}" for="segundoapellido" />
@@ -26,13 +33,7 @@
                         <p:inputText id="segundonombre" value="#{clientesController.selected.segundonombre}" title="#{bundle.EditClientesTitle_segundonombre}" />
                         <p:outputLabel value="#{bundle.EditClientesLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{clientesController.selected.correo}" title="#{bundle.EditClientesTitle_correo}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_correo}"/>
-                        <p:outputLabel value="#{bundle.EditClientesLabel_idtipodocumento}" for="idtipodocumento" />
-                        <p:selectOneMenu id="idtipodocumento" value="#{clientesController.selected.idtipodocumento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idtipodocumento}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{tiposdocumentoController.itemsAvailableSelectOne}"
-                                           var="idtipodocumentoItem"
-                                           itemValue="#{idtipodocumentoItem}"/>
-                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditClientesLabel_idtipodocumento}" for="idtipodocumento" />                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{clientesController.update}" value="#{bundle.Save}" update="display,:ClientesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ClientesEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ClientesEditDialog.hide()"/>

@@ -3,9 +3,12 @@ package com.carlosdonoso.mb;
 import com.carlosdonoso.persistence.Movimientos;
 import com.carlosdonoso.mb.util.JsfUtil;
 import com.carlosdonoso.mb.util.JsfUtil.PersistAction;
+import com.carlosdonoso.persistence.Cuentas;
 import com.carlosdonoso.prueba.MovimientosFacade;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,8 +28,11 @@ public class MovimientosController implements Serializable {
 
     @EJB
     private com.carlosdonoso.prueba.MovimientosFacade ejbFacade;
+    @EJB
+    private com.carlosdonoso.prueba.CuentasFacade ejbCuenta;
     private List<Movimientos> items = null;
     private Movimientos selected;
+    private Cuentas cuentas;
 
     public MovimientosController() {
     }
@@ -54,12 +60,27 @@ public class MovimientosController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-
-    public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MovimientosCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+    
+    public boolean validation(){
+        boolean falso = false;
+        Cuentas cuenta = ejbCuenta.obtenerSaldoCuenta(selected.getIdcuentas().getIdcuentas());
+        int valorComparacion = cuenta.getSaldo().compareTo(selected.getValor());
+        if(valorComparacion == 1){
+            return true;        
         }
+        return falso;
+    }
+
+    public void create() {        
+        if(validation()){
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MovimientosCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
+        }else{
+            JsfUtil.addErrorMessage("No tiene suficiente saldo para la transaccion");
+        }     
+        
     }
 
     public void update() {
@@ -84,6 +105,7 @@ public class MovimientosController implements Serializable {
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
+            System.out.println("Datos");
             try {
                 if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(selected);
@@ -115,6 +137,14 @@ public class MovimientosController implements Serializable {
 
     public List<Movimientos> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public Cuentas getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(Cuentas cuentas) {
+        this.cuentas = cuentas;
     }
 
     @FacesConverter(forClass = Movimientos.class)

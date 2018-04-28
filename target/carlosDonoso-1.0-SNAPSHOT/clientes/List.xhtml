@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/template.xhtml">
 
@@ -15,7 +16,7 @@
 
         <ui:define name="body">
             <h:form id="ClientesListForm">
-                <p:panel header="#{bundle.ListClientesTitle}">
+                <b:panel look="primary" title="#{bundle.ListClientesTitle}">
                     <p:dataTable id="datalist" value="#{clientesController.items}" var="item"
                                  selectionMode="single" selection="#{clientesController.selected}"
                                  paginator="true"
@@ -73,7 +74,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListClientesTitle_idtipodocumento}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idtipodocumento}"/>
+                            <h:outputText value="#{item.idtipodocumento.descripcion}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{clientesController.prepareCreate}" update=":ClientesCreateForm" oncomplete="PF('ClientesCreateDialog').show()"/>
@@ -82,7 +83,7 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{clientesController.destroy}" update=":growl,datalist" disabled="#{empty clientesController.selected}"/>
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
+                </b:panel>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

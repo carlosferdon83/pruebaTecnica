@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -25,11 +26,11 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
                                            var="idclientesItem"
-                                           itemValue="#{idclientesItem}"/>
+                                           itemValue="#{idclientesItem}" itemLabel="#{idclientesItem.numerodocumento}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuariosController.update}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuariosEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuariosEditDialog.hide()"/>
+                    <b:commandButton look="primary" actionListener="#{usuariosController.update}" value="#{bundle.Save}" update="display,:UsuariosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuariosEditDialog');"/>
+                    <b:commandButton look="info" value="#{bundle.Cancel}" onclick="UsuariosEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

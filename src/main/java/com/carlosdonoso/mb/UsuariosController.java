@@ -4,6 +4,8 @@ import com.carlosdonoso.persistence.Usuarios;
 import com.carlosdonoso.mb.util.JsfUtil;
 import com.carlosdonoso.mb.util.JsfUtil.PersistAction;
 import com.carlosdonoso.prueba.UsuariosFacade;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -27,6 +30,8 @@ public class UsuariosController implements Serializable {
     private com.carlosdonoso.prueba.UsuariosFacade ejbFacade;
     private List<Usuarios> items = null;
     private Usuarios selected;
+    private String usuario;
+    private String clave;
 
     public UsuariosController() {
     }
@@ -53,6 +58,15 @@ public class UsuariosController implements Serializable {
         selected = new Usuarios();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public void validarUsuario(ActionEvent event) throws IOException {
+        Usuarios usuarios = ejbFacade.validarUsuario(this.getUsuario(), this.getClave());
+        if (usuarios == null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Atencion", "Las credenciales para el usuario son incorrectas"));
+        } else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("faces/template.xhtml");
+        }
     }
 
     public void create() {
@@ -115,6 +129,22 @@ public class UsuariosController implements Serializable {
 
     public List<Usuarios> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     @FacesConverter(forClass = Usuarios.class)

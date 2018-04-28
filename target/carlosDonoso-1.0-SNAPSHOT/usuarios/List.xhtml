@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/template.xhtml">
 
@@ -15,7 +16,7 @@
 
         <ui:define name="body">
             <h:form id="UsuariosListForm">
-                <p:panel header="#{bundle.ListUsuariosTitle}">
+                <b:panel look="primary" title="#{bundle.ListUsuariosTitle}">
                     <p:dataTable id="datalist" value="#{usuariosController.items}" var="item"
                                  selectionMode="single" selection="#{usuariosController.selected}"
                                  paginator="true"
@@ -64,7 +65,7 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{usuariosController.destroy}" update=":growl,datalist" disabled="#{empty usuariosController.selected}"/>
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
+                </b:panel>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

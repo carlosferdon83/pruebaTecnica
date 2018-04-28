@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -13,7 +14,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cuentasController.selected != null}">
                         <p:outputLabel value="#{bundle.EditCuentasLabel_idcuentas}" for="idcuentas" />
-                        <p:inputText id="idcuentas" value="#{cuentasController.selected.idcuentas}" title="#{bundle.EditCuentasTitle_idcuentas}" required="true" requiredMessage="#{bundle.EditCuentasRequiredMessage_idcuentas}"/>
+                        <p:inputText disabled="true" id="idcuentas" value="#{cuentasController.selected.idcuentas}" title="#{bundle.EditCuentasTitle_idcuentas}" required="true" requiredMessage="#{bundle.EditCuentasRequiredMessage_idcuentas}"/>
                         <p:outputLabel value="#{bundle.EditCuentasLabel_numerocuenta}" for="numerocuenta" />
                         <p:inputText id="numerocuenta" value="#{cuentasController.selected.numerocuenta}" title="#{bundle.EditCuentasTitle_numerocuenta}" required="true" requiredMessage="#{bundle.EditCuentasRequiredMessage_numerocuenta}"/>
                         <p:outputLabel value="#{bundle.EditCuentasLabel_saldo}" for="saldo" />
@@ -27,7 +28,7 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
                                            var="idclienteItem"
-                                           itemValue="#{idclienteItem}"/>
+                                           itemValue="#{idclienteItem}" itemLabel="#{idclienteItem.numerodocumento}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{cuentasController.update}" value="#{bundle.Save}" update="display,:CuentasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CuentasEditDialog');"/>

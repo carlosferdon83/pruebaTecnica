@@ -7,7 +7,7 @@ package com.carlosdonoso.persistence;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,7 +51,7 @@ public class Tiposdocumento implements Serializable {
     @Column(name = "DESCRIPCION", nullable = false, length = 30)
     private String descripcion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtipodocumento", fetch = FetchType.LAZY)
-    private List<Clientes> clientesList;
+    private Collection<Clientes> clientesCollection;
 
     public Tiposdocumento() {
     }
@@ -82,12 +82,12 @@ public class Tiposdocumento implements Serializable {
     }
 
     @XmlTransient
-    public List<Clientes> getClientesList() {
-        return clientesList;
+    public Collection<Clientes> getClientesCollection() {
+        return clientesCollection;
     }
 
-    public void setClientesList(List<Clientes> clientesList) {
-        this.clientesList = clientesList;
+    public void setClientesCollection(Collection<Clientes> clientesCollection) {
+        this.clientesCollection = clientesCollection;
     }
 
     @Override

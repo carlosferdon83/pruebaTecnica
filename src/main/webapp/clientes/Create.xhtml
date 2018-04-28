@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -16,6 +17,13 @@
                         <p:inputText id="idcliente" value="#{clientesController.selected.idcliente}" title="#{bundle.CreateClientesTitle_idcliente}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_idcliente}"/>
                         <p:outputLabel value="#{bundle.CreateClientesLabel_numerodocumento}" for="numerodocumento" />
                         <p:inputText id="numerodocumento" value="#{clientesController.selected.numerodocumento}" title="#{bundle.CreateClientesTitle_numerodocumento}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_numerodocumento}"/>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_idtipodocumento}" for="idtipodocumento" />
+
+                        <p:selectOneMenu id="idtipodocumento" value="#{clientesController.selected.idtipodocumento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idtipodocumento}">
+                            <f:selectItems value="#{tiposdocumentoController.itemsAvailableSelectOne}"
+                                           var="idtipodocumentoItem"
+                                           itemValue="#{idtipodocumentoItem}" itemLabel="#{idtipodocumentoItem.descripcion}"/>
+                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateClientesLabel_primerapellido}" for="primerapellido" />
                         <p:inputText id="primerapellido" value="#{clientesController.selected.primerapellido}" title="#{bundle.CreateClientesTitle_primerapellido}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_primerapellido}"/>
                         <p:outputLabel value="#{bundle.CreateClientesLabel_segundoapellido}" for="segundoapellido" />
@@ -26,12 +34,7 @@
                         <p:inputText id="segundonombre" value="#{clientesController.selected.segundonombre}" title="#{bundle.CreateClientesTitle_segundonombre}" />
                         <p:outputLabel value="#{bundle.CreateClientesLabel_correo}" for="correo" />
                         <p:inputText id="correo" value="#{clientesController.selected.correo}" title="#{bundle.CreateClientesTitle_correo}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_correo}"/>
-                        <p:outputLabel value="#{bundle.CreateClientesLabel_idtipodocumento}" for="idtipodocumento" />
-                        <p:selectOneMenu id="idtipodocumento" value="#{clientesController.selected.idtipodocumento}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_idtipodocumento}">
-                            <f:selectItems value="#{tiposdocumentoController.itemsAvailableSelectOne}"
-                                           var="idtipodocumentoItem"
-                                           itemValue="#{idtipodocumentoItem}"/>
-                        </p:selectOneMenu>
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{clientesController.create}" value="#{bundle.Save}" update="display,:ClientesListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientesCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ClientesCreateDialog.hide()"/>

@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -25,8 +26,8 @@
                         <p:outputLabel value="#{bundle.CreateAuditoriaLabel_fechamovimiento}" for="fechamovimiento" />
                         <p:calendar id="fechamovimiento" pattern="MM/dd/yyyy HH:mm:ss" value="#{auditoriaController.selected.fechamovimiento}" title="#{bundle.EditAuditoriaTitle_fechamovimiento}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_fechamovimiento}" showOn="button"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{auditoriaController.create}" value="#{bundle.Save}" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuditoriaCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="AuditoriaCreateDialog.hide()"/>
+                    <b:commandButton look="primary" actionListener="#{auditoriaController.create}" value="#{bundle.Save}" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AuditoriaCreateDialog');"/>
+                    <b:commandButton look="danger" value="#{bundle.Cancel}" onclick="AuditoriaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

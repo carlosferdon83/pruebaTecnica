@@ -2,7 +2,14 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="com.carlosDonoso_carlosDonoso_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>jdbc/oracle</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>com.carlosdonoso.persistence.Auditoria</class>
+    <class>com.carlosdonoso.persistence.Clientes</class>
+    <class>com.carlosdonoso.persistence.Cuentas</class>
+    <class>com.carlosdonoso.persistence.Movimientos</class>
+    <class>com.carlosdonoso.persistence.Naturaleza</class>
+    <class>com.carlosdonoso.persistence.Tiposdocumento</class>
+    <class>com.carlosdonoso.persistence.Usuarios</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>
 </persistence>

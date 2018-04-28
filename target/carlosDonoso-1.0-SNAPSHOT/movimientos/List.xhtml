@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/template.xhtml">
 
@@ -15,7 +16,7 @@
 
         <ui:define name="body">
             <h:form id="MovimientosListForm">
-                <p:panel header="#{bundle.ListMovimientosTitle}">
+                <b:panel look="primary" title="#{bundle.ListMovimientosTitle}">
                     <p:dataTable id="datalist" value="#{movimientosController.items}" var="item"
                                  selectionMode="single" selection="#{movimientosController.selected}"
                                  paginator="true"
@@ -62,11 +63,11 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{movimientosController.prepareCreate}" update=":MovimientosCreateForm" oncomplete="PF('MovimientosCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MovimientosViewForm" oncomplete="PF('MovimientosViewDialog').show()" disabled="#{empty movimientosController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MovimientosEditForm" oncomplete="PF('MovimientosEditDialog').show()" disabled="#{empty movimientosController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{movimientosController.destroy}" update=":growl,datalist" disabled="#{empty movimientosController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MovimientosEditForm" oncomplete="PF('MovimientosEditDialog').show()" disabled="true"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{movimientosController.destroy}" update=":growl,datalist" disabled="true"/>
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
+                </b:panel>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

@@ -1,36 +1,86 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Inicio</title>
+        <style>
+            #main-header{
+                background: #002547;
+                color: white;
+                height: 40px;
+            }
+            #footer {
+                background-color: #fff;
+                position:fixed;
+                left:0px;
+                bottom:0px;
+                height:50px;
+                width:100%;
+                color: #aaaaaa;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+        </style>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/auditoria/List" value="Show All Auditoria Items"/>
-        <br />
-        <h:link outcome="/clientes/List" value="Show All Clientes Items"/>
-        <br />
-        <h:link outcome="/cuentas/List" value="Show All Cuentas Items"/>
-        <br />
-        <h:link outcome="/movimientos/List" value="Show All Movimientos Items"/>
-        <br />
-        <h:link outcome="/naturaleza/List" value="Show All Naturaleza Items"/>
-        <br />
-        <h:link outcome="/tiposdocumento/List" value="Show All Tiposdocumento Items"/>
-        <br />
-        <h:link outcome="/usuarios/List" value="Show All Usuarios Items"/>
+        <div id="main-header"></div>
+        <b:container style="width:100%;">
+            <script>
+                $(document).ready(function () {
+                    function disableBack() {
+                        window.history.forward()
+                    }
+                    window.onload = disableBack();
+                    window.onpageshow = function (evt) {
+                        if (evt.persisted)
+                            disableBack()
+                    }
+                });
+            </script>
+            <b:jumbotron style="background-color:#fff;">
+                
+                <hr></hr>
+                <h:form prependId="">                        
+                    <b:row>
+                        <b:column span="3"/>
+                        <b:column span="6">                    
+                            <b:panel title="Acceso Sistema" look="primary" collapsible="false">
+                                <b:row>
+                                    <b:column medium-screen="15">
+                                        <b:panelGrid columns="1">
+                                            <b:inputText id="usuario" span="6" label="Usuario" value="#{usuariosController.usuario}" required="true" requiredMessage="Debe ingresar el usuario">
+                                                <f:facet name="prepend">
+                                                    <b:icon name="user" />
+                                                </f:facet>
+                                            </b:inputText>
+                                            <b:inputSecret id="contraseña" span="6" label="Contraseña" value="#{usuariosController.clave}" required="true" requiredMessage="Debe ingresar la contraseña">
+                                                <f:facet name="prepend">
+                                                    <b:iconAwesome name="key" />
+                                                </f:facet>
+                                            </b:inputSecret>                  
+                                        </b:panelGrid>
+                                    </b:column>                                
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="15">
+                                        <b:messages/>
+                                    </b:column>
+                                </b:row>
+                                <f:facet name="footer">
+                                    <b:commandButton value="Aceptar" update="@form" look="primary" actionListener="#{usuariosController.validarUsuario(event)}"/>
+                                </f:facet>                                                    
+                            </b:panel>
+                        </b:column>
+                        <b:column span="3"/>
+                    </b:row>
+                </h:form>
+            </b:jumbotron>
+        </b:container>        
     </h:body>
-
-
-
-
-
-
-
 </html>
-

@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/template.xhtml">
 
@@ -15,7 +16,7 @@
 
         <ui:define name="body">
             <h:form id="AuditoriaListForm">
-                <p:panel header="#{bundle.ListAuditoriaTitle}">
+                <b:panel look="primary" title="#{bundle.ListAuditoriaTitle}">
                     <p:dataTable id="datalist" value="#{auditoriaController.items}" var="item"
                                  selectionMode="single" selection="#{auditoriaController.selected}"
                                  paginator="true"
@@ -66,13 +67,13 @@
                             </h:outputText>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{auditoriaController.prepareCreate}" update=":AuditoriaCreateForm" oncomplete="PF('AuditoriaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AuditoriaViewForm" oncomplete="PF('AuditoriaViewDialog').show()" disabled="#{empty auditoriaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AuditoriaEditForm" oncomplete="PF('AuditoriaEditDialog').show()" disabled="#{empty auditoriaController.selected}"/>
+                            <p:commandButton disabled="true" id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{auditoriaController.prepareCreate}" update=":AuditoriaCreateForm" oncomplete="PF('AuditoriaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AuditoriaViewForm" oncomplete="PF('AuditoriaViewDialog').show()" />
+                            <p:commandButton disabled="true" id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":AuditoriaEditForm" oncomplete="PF('AuditoriaEditDialog').show()" />
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{auditoriaController.destroy}" update=":growl,datalist" disabled="#{empty auditoriaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
+                </b:panel>
             </h:form>
 
             <ui:include src="Create.xhtml"/>

@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition>
 
@@ -13,7 +14,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{auditoriaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAuditoriaLabel_idauditoria}" for="idauditoria" />
-                        <p:inputText id="idauditoria" value="#{auditoriaController.selected.idauditoria}" title="#{bundle.EditAuditoriaTitle_idauditoria}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idauditoria}"/>
+                        <p:inputText disabled="true" id="idauditoria" value="#{auditoriaController.selected.idauditoria}" title="#{bundle.EditAuditoriaTitle_idauditoria}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idauditoria}"/>
                         <p:outputLabel value="#{bundle.EditAuditoriaLabel_idmovimientos}" for="idmovimientos" />
                         <p:inputText id="idmovimientos" value="#{auditoriaController.selected.idmovimientos}" title="#{bundle.EditAuditoriaTitle_idmovimientos}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_idmovimientos}"/>
                         <p:outputLabel value="#{bundle.EditAuditoriaLabel_idcuentas}" for="idcuentas" />
@@ -25,8 +26,8 @@
                         <p:outputLabel value="#{bundle.EditAuditoriaLabel_fechamovimiento}" for="fechamovimiento" />
                         <p:calendar id="fechamovimiento" pattern="MM/dd/yyyy HH:mm:ss" value="#{auditoriaController.selected.fechamovimiento}" title="#{bundle.EditAuditoriaTitle_fechamovimiento}" required="true" requiredMessage="#{bundle.EditAuditoriaRequiredMessage_fechamovimiento}" showOn="button"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{auditoriaController.update}" value="#{bundle.Save}" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AuditoriaEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="AuditoriaEditDialog.hide()"/>
+                    <b:commandButton look="primary" actionListener="#{auditoriaController.update}" value="#{bundle.Save}" update="display,:AuditoriaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AuditoriaEditDialog');"/>
+                    <b:commandButton look="danger" value="#{bundle.Cancel}" onclick="AuditoriaEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
